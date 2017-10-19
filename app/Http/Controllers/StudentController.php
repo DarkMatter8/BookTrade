@@ -10,4 +10,9 @@ class StudentController extends Controller
 
     	return view('student.home');
     }
+
+    public function show_sell(){
+
+    	return view('student.sell');
+    }
 }
