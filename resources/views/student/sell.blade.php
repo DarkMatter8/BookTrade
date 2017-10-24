@@ -43,14 +43,14 @@
 
 	<div class="row">
 	<div class="col-sm-6">
-	<form>
+	<form action="/AddListing" method="POST">
 	    <div class="form-group">
-	        <input type="text" value="" placeholder="Book Name" class="form-control">
+	        <input type="text" value="" placeholder="Book Name" class="form-control" required="true" name="book_name" id="book_name">
 	    </div>
 
 	    <div class="form-group">
-	        <select class="form-control" name="year" id="year">
-	        	<option disabled selected>Year</option>
+	        <select class="form-control" name="year" id="year" required="true">
+	        	<option disabled selected value="">Year</option>
 	        	<option>FE</option>
 	        	<option>SE</option>
 	        	<option>TE</option>
@@ -59,8 +59,8 @@
 	    </div>
 
 	    <div class="form-group">
-	        <select class="form-control" name="branch" id="branch">
-	        	<option disabled selected>Branch</option>
+	        <select class="form-control" name="branch" id="branch" required="true">
+	        	<option disabled selected value="">Branch</option>
 	        	<option value="CE">CE</option>
 	        	<option>EXTC</option>
 	        	<option>IT</option>
@@ -70,28 +70,30 @@
 	    </div>
 
 	    <div class="form-group">
-	        <select class="form-control" name="sem" id="sem">
-	        	<option disabled selected>Semester</option>
+	        <select class="form-control" name="semester" id="sem">
+	        	<option disabled selected value="">Semester</option>
 	        </select>
 	    </div>
 
 	    <div class="form-group">
 	        <select class="form-control" name="subject" id="subject">
-	        	<option disabled selected>Subject</option>
+	        	<option disabled selected value="">Subject</option>
 	        </select>
 	    </div>
 
 	    <div class="form-group">
-	        <input type="text" value="" placeholder="Author / Publication" class="form-control">
+	        <input type="text" name="author" placeholder="Author / Publication" class="form-control" required="true">
 	    </div>
 
 	    <div class="form-group">
-	        <textarea class="form-control" placeholder="Description" rows="3"></textarea>
+	        <textarea class="form-control" name="description" placeholder="Description" rows="3" required=""></textarea>
 	    </div>
 
 	    <div class="form-group">
 	    	<input type='file' id="imgInp" />
 	    </div>
+
+	    {{ csrf_field() }}
 
 	 <button class="btn btn-primary" type="submit">Submit</button>
 

@@ -26,16 +26,16 @@ $('#year').on('change',function(){
 
       switch(year){
         case 'FE':
-          select.empty().append('<option disabled selected>Semester</option><option value="1">1st Semester</option><option value="2">2nd Semester</option>');
+          select.empty().append('<option disabled selected value="">Semester</option><option value="1">1st Semester</option><option value="2">2nd Semester</option>');
           break;
         case 'SE':
-          select.empty().append('<option disabled selected>Semester</option><option value="3">3rd Semester</option><option value="4">4th Semester</option>');
+          select.empty().append('<option disabled selected value="">Semester</option><option value="3">3rd Semester</option><option value="4">4th Semester</option>');
           break;
         case 'TE':
-          select.empty().append('<option disabled selected>Semester</option><option value="5">5th Semester</option><option value="6">6th Semester</option>');
+          select.empty().append('<option disabled selected value="">Semester</option><option value="5">5th Semester</option><option value="6">6th Semester</option>');
           break;
         case 'BE':
-          select.empty().append('<option disabled selected>Semester</option><option value="7">7th Semester</option><option value="8">8th Semester</option>');
+          select.empty().append('<option disabled selected value="">Semester</option><option value="7">7th Semester</option><option value="8">8th Semester</option>');
           break;
       }
 })
@@ -49,7 +49,7 @@ $('#sem').on('change',function(){
         var sub = $('#subject');
 
         sub.empty();
-
+        sub.append('<option selected disabled value="">Subject</option>');
         for(var i=0;i<data.length;i++){
           sub.append('<option>'+data[i]+'</option>');
         }

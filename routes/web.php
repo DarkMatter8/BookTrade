@@ -23,8 +23,10 @@ Route::get('/student/home','StudentController@show_home');
 Route::get('/student/sell','StudentController@show_sell');
 
 Route::get('/getSubjects/{sem}/{branch}',function($sem,$branch){
-
 	$sub = Subject::where('semester',$sem)->where('branch', $branch)->pluck('name');
 	return $sub;
-
 });
+
+Route::post('/AddListing','StudentController@add_listing');
+
+Route::get('/student/ShowListings','StudentController@show_listing');
