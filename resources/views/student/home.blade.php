@@ -20,7 +20,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="navigation">
     	    <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#pablo">
+                    <a class="nav-link" href="/student/home">
                         Home
                     </a>
                 </li>
@@ -31,7 +31,7 @@
                     <a class="nav-link" href="#pablo">Settings</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#pablo">Logout</a>
+                    <a class="nav-link" href="/logout">Logout</a>
                 </li>
             </ul>
         </div>
@@ -40,45 +40,66 @@
 
 <div class="container">
 	<div class="row">
-			<div class="col-sm-4">
+			<div class="col-sm-4" align="center">
 				<br>
 				<br>
 				<br>
 				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<button class="btn btn-primary btn-lg">Search For A Book !</button>
-			</div>
-			<div class="col-sm-4">
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
+				<a href="/student/buy"><button class="btn btn-primary btn-lg">Search For A Book !</button></a>
 				<br>
 				<br>
 				<a href="/student/sell"><button class="btn btn-primary btn-lg">Sell A Book !</button></a>
 			</div>
 			<div class="col-sm-4">
+			<h3>Subscribe For A Book !</h3>
+				<form action="/AddSubscription" method="POST">
+
+			    <div class="form-group">
+			        <select class="form-control" name="year" id="year" required="true">
+			        	<option disabled selected value="">Year</option>
+			        	<option>FE</option>
+			        	<option>SE</option>
+			        	<option>TE</option>
+			        	<option>BE</option>
+			        </select>
+			    </div>
+
+			    <div class="form-group">
+			        <select class="form-control" name="branch" id="branch" required="true" disabled>
+			        	<option disabled selected value="">Branch</option>
+			        	<option value="CE">CE</option>
+			        	<option>EXTC</option>
+			        	<option>IT</option>
+			        	<option>ME</option>
+			        	<option>PPT</option>
+			        </select>
+			    </div>
+
+			    <div class="form-group">
+			        <select class="form-control" name="semester" id="sem" disabled>
+			        	<option disabled selected value="">Semester</option>
+			        </select>
+			    </div>
+
+			    <div class="form-group">
+			        <select class="form-control" name="subject" id="subject" disabled>
+			        	<option disabled selected value="">Subject</option>
+			        </select>
+			    </div>
+
+			    {{ csrf_field() }}
+
+			 <button class="btn btn-primary" type="submit">Submit</button>
+
+				</form>
+			</div>
+			<div class="col-sm-4">
 			<h3>Recent Listings</h3>
 				<ul class="list-group">
-					<li class="list-group-item">asdadaad</li>
-					<li class="list-group-item">asdadaad</li>
-					<li class="list-group-item">asdadaad</li>
-					<li class="list-group-item">asdadaad</li>
-					<li class="list-group-item">asdadaad</li>
-					<li class="list-group-item">asdadaad</li>
-					<li class="list-group-item">asdadaad</li>
-					<li class="list-group-item">asdadaad</li>
-					<li class="list-group-item">asdadaad</li>
-					<li class="list-group-item" align="center"><a href="#">Show More ...</a></li>	
+					@foreach($listings as $listing)
+						<li class ="list-group-item">{{ $listing->book_name }}</li>
+					@endforeach
+					<li class="list-group-item" align="center"><a href="/student/ShowListings">Show More ...</a></li>	
 				</ul>
 			</div>
 	</div>

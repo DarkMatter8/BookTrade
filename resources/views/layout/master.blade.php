@@ -20,6 +20,8 @@
 <script>
 
 $('#year').on('change',function(){
+    $('#branch').removeAttr('disabled');
+  $('#sem').removeAttr('disabled');    
     var year = $('#year').val();
     console.log(year);
     var select = $('#sem');
@@ -40,10 +42,11 @@ $('#year').on('change',function(){
       }
 })
 
+
 $('#sem').on('change',function(){
   var b = $('#branch').val();
   var s = $('#sem').val();
-
+  $('#subject').removeAttr('disabled');
   $.get('/getSubjects/'+s+'/'+b, function(data, status){
         console.log(data);
         var sub = $('#subject');

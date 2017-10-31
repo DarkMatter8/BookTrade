@@ -28,16 +28,12 @@
     <br>
     <br>
     <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
     <div align="center">
+        <img src="{{asset('img/22.png')}}" width="13%" height="13%">
         <p style="font-size:5em; color:#2196F3;" class="animated tada">BookTrade</p>
         <p style="font-size:2em; color:#696969;">A Place To Search,Sell your Engineering Books :)</p>
         <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Sign In</button>
-        <button class="btn btn-primary btn-lg">Sign Up</button>
+        <a href="/signup"><button class="btn btn-primary btn-lg">Sign Up</button></a>
         <br>
         <br>
         <br>

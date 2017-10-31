@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title', 'Sell')
+@section('title', 'Search')
 @section('content')
 
 <nav class="navbar navbar-expand-lg bg-info">
@@ -20,7 +20,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="navigation">
     	    <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/student/home">
+                    <a class="nav-link" href="/home">
                         Home
                     </a>
                 </li>
@@ -37,16 +37,18 @@
         </div>
     </div>
 </nav>
-
 <div class="container">
-	<h2 align="center">Enter Book Details</h2>
-
+<br>
+<div class="row">
+	<div class="col-sm-8">
 	<div class="row">
-	<div class="col-sm-6">
-	<form action="/AddListing" method="POST" enctype="multipart/form-data"	>
-	    <div class="form-group">
-	        <input type="text" value="" placeholder="Book Name" class="form-control" required="true" name="book_name" id="book_name">
-	    </div>
+		<div class="col-sm-6" align="center"><a href="/findbybranch/{{Session('session')->branch}}"><button class="btn btn-primary btn-lg">Search For Your Branch !</button></a></div>
+		<div class="col-sm-6" align="center"><a href="/findbyyear/{{Session('session')->year}}"><button class="btn btn-primary btn-lg">Search For Your Year !</button></a></div>
+	</div>
+	<br>
+	<br>
+		<h3 align="center">Filter Your Choice !</h3>
+		<form action="/find" method="POST">
 
 	    <div class="form-group">
 	        <select class="form-control" name="year" id="year" required="true">
@@ -81,32 +83,22 @@
 	        </select>
 	    </div>
 
-	    <div class="form-group">
-	        <input type="text" name="author" placeholder="Author / Publication" class="form-control" required="true">
-	    </div>
-
-	    <div class="form-group">
-	        <textarea class="form-control" name="description" placeholder="Description" rows="3" required=""></textarea>
-	    </div>
-
-	    <div class="form-group">
-	    	<input type='file' id="imgInp" name="file"/>
-	    </div>
-
 	    {{ csrf_field() }}
 
 	 <button class="btn btn-primary" type="submit">Submit</button>
 
-	</form>
+		</form>	
 	</div>
-	<div class="col-sm-6">
-	<div align="center">
-		<img id="blah" src="#" alt="your image"/>
-	</div>
-	</div>
+	<div class="col-sm-4">
+		<h3>Books You Might Prefer !</h3>
+				<ul class="list-group">
+					@foreach($listings as $listing)
+						<li class ="list-group-item">{{ $listing->book_name }}</li>
+					@endforeach
+					<li class="list-group-item" align="center"><a href="/student/ShowListings">Show More ...</a></li>	
+				</ul>
+			</div>
 	</div>
 </div>
-
-
-
+</div>
 @stop

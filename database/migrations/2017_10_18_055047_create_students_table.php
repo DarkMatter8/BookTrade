@@ -20,6 +20,8 @@ class CreateStudentsTable extends Migration
             $table->string('password');
             $table->string('year');
             $table->string('branch');
+            $table->integer('semester');
+            $table->string('contact');
             $table->string('role');
             $table->timestamps();
         });

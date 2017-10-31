@@ -7,6 +7,7 @@ use App\Student;
 use Validator;
 use Hash;
 use Session;
+use Redirect;
 
 class AuthController extends Controller
 {
@@ -56,6 +57,44 @@ class AuthController extends Controller
                 ]);
             }
         }
+    }
+
+    public function do_register(Request $request){
+
+        if(($request->input('password'))==($request->input('password_a'))){
+            
+            $exists = Student::where('email', $request->input('email'))->first();
+
+            if($exists){
+                 return Redirect::back()->withErrors(['User with same email address already Exists !']);
+            }else{
+
+            $new = new Student;
+            $new->name = $request->input('name');
+            $new->email = $request->input('email');
+            $new->password = Hash::make($request->input('password'));
+            $new->year = $request->input('year');
+            $new->branch = $request->input('branch');
+            $new->semester = $request->input('semester');
+            $new->role = 'student';
+            $new->contact = $request->input('contact');
+            $new->save();
+
+            $success = 'You are Registered Successfully !';;
+
+            return redirect('/signup')->with('status', 'You are successfully Registered!');
+
+            }
+        }else{
+            return Redirect::back()->withErrors(['The Entered Passwords are not Same']);
+        }
+    }
+
+    public function do_logout(){
+        
+        Session::flush();
+        
+        return redirect('/');
     }
 
 }

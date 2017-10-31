@@ -39,46 +39,20 @@
 </nav>
 
 <div class="container">
-	<h1 align="center">All Listings </h1>
+	<h1 align="center">Available Books ! </h1>
+	
 	<ul class="list-group">
 		@foreach($listings as $listing)
 			<li class="list-group-item">
 				<div class="panel-group">
 				  <div class="panel panel-default">
 				    <div class="panel-heading">
-				    <div class="row">
-				    <div class="col-sm-2">
-				    @if($listing->file_path == NULL)
-				    <img src="{{asset('img/33.jpg')}}">
-				    @else
-				    <img src="{{asset($listing->file_path)}}">
-				    @endif
-				    </div>
-				    <div class="col-sm-7">
 				      <p class="panel-title" style="font-size:1.5em;">
 				        <a data-toggle="collapse" href="#collapse1">{{ $listing->book_name }}</a>
 				      </p>
 				      <p>Author:- {{ $listing->author }}</p>
 				      <p>{{ $listing->year }} / {{ $listing->branch }}</p>
 				      <p>Subject:- {{ $listing->subject }}</p>
-				    </div>
-				    <div class="col-sm-3">
-				    <br>
-				    <br>
-				    <br>
-				    @if($listing->interested == 0)
-				    	<form action="/addInterested" method="POST">
-				    	<input type="hidden" value="{{ $listing->owner_id }}" name="owner">
-				    	<input type="hidden" value="{{ $listing->id }}" name="listing">
-				    	{{ csrf_field() }}
-				    	<button class="btn btn-success btn-block" type="submit">Interested !</button><br>
-				    	</form>
-				    @else
-				    	<button class="btn btn-success btn-block" disabled>Interested !</button>
-				    @endif
-				    	<br>
-				    </div>
-				    </div>
 				    </div>
 				    <div id="collapse1" class="panel-collapse collapse">
 				      <div class="panel-body">
@@ -93,6 +67,7 @@
 			</li>
 		@endforeach
 	</ul>
+
 </div>
 
 @stop
