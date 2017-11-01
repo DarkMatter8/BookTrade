@@ -5,8 +5,8 @@
 <nav class="navbar navbar-expand-lg bg-info">
     <div class="container">
         <div class="navbar-translate">
-            <a class="navbar-brand" href="#pablo">
-               BookTrade
+            <a class="navbar-brand" href="/">
+               <i class="fa fa-book" aria-hidden="true"></i> BookTrade
            </a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
    	        <span class="navbar-toggler-bar bar1"></span>
@@ -25,10 +25,10 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#pablo">Activity</a>
+                    <a class="nav-link" href="/student/activity">Activity</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#pablo">Settings</a>
+                    <a class="nav-link" href="/student/settings">Settings</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/logout">Logout</a>
@@ -44,7 +44,15 @@
 			<h3>Your Recent Listings</h3>
 				<ul class="list-group">
 					@foreach($listings as $listing)
-						<li class ="list-group-item">{{ $listing->book_name }}<button class="btn btn-danger btn-icon  btn-icon-mini btn-round" style="float:right;"></button></li>
+						<li class ="list-group-item">{{ $listing->book_name }}
+						<form action="/Remove" method="POST">
+						<input type="hidden" value="{{$listing->id}}" name="id">
+						<input type="hidden" value="listing" name="type">
+						{{ csrf_field() }}
+						<button class="btn btn-danger btn-icon  btn-icon-mini btn-round" type="submit" style="float:right;"><i class="fa fa-trash-o" aria-hidden="true"></i>
+</button>
+						</form>
+						</li>
 					@endforeach
 				</ul>
 			</div>
@@ -52,7 +60,14 @@
 		<h3>Your Interested Books !</h3>
 			<ul class="list-group">
 				@foreach($interested as $i)
-					<li class ="list-group-item">{{ $i->book_name }}<button class="btn btn-danger btn-icon  btn-icon-mini btn-round" style="float:right;"></button></li>
+					<li class ="list-group-item">{{ $i->book_name }}
+					<form action="/Remove" method="POST">
+					<input type="hidden" value="{{$i->id}}" name="id">
+					<input type="hidden" value="interested" name="type">
+					{{ csrf_field() }}
+					<button class="btn btn-danger btn-icon  btn-icon-mini btn-round" type="submit" style="float:right;"><i class="fa fa-trash-o" aria-hidden="true"></i>
+</button></li>
+					</form>
 				@endforeach
 			</ul>
 		</div>
@@ -60,7 +75,14 @@
 		<h3>Your Subscribed Subjects !</h3>
 			<ul class="list-group">
 				@foreach($subscriptions as $subscription)
-					<li class ="list-group-item">{{ $subscription->subject }}<button class="btn btn-danger btn-icon  btn-icon-mini btn-round" style="float:right;"></button></li>
+					<li class ="list-group-item">{{ $subscription->subject }}
+					<form action="/Remove" method="POST">
+					<input type="hidden" value="{{$subscription->id}}" name="id">
+					<input type="hidden" value="subscribe" name="type">
+					{{ csrf_field() }}
+					<button class="btn btn-danger btn-icon  btn-icon-mini btn-round" type="submit" style="float:right;"><i class="fa fa-trash-o" aria-hidden="true"></i>
+</button></li>
+					</form>
 				@endforeach
 			</ul>
 		</div>

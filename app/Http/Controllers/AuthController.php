@@ -8,6 +8,7 @@ use Validator;
 use Hash;
 use Session;
 use Redirect;
+use Mail;
 
 class AuthController extends Controller
 {
@@ -80,7 +81,13 @@ class AuthController extends Controller
             $new->contact = $request->input('contact');
             $new->save();
 
-            $success = 'You are Registered Successfully !';;
+            $success = 'You are Registered Successfully !';
+
+            Mail::send('email.register', array('new' => $new), function($message) use ($new) {
+                $message->to($new->email);
+                $message->subject('Registration Successfull');
+            });
+
 
             return redirect('/signup')->with('status', 'You are successfully Registered!');
 

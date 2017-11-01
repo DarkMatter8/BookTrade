@@ -10,30 +10,46 @@ use App\Subscribe;
 use Session;
 use Redirect;
 use Hash;
-
+use Mail;
 class StudentController extends Controller
 {
     public function show_home(){
 
-        $listings = Listing::orderBy('created_at', 'desc')->get();
+        if(Session::has('session')){
 
-    	return view('student.home')->with('listings', $listings);
+            $listings = Listing::orderBy('created_at', 'desc')->get();
+
+        	return view('student.home')->with('listings', $listings);
+        }else{
+            return redirect('/');
+        }
     }
 
     public function show_sell(){
 
+        if(Session::has('session')){
+
     	return view('student.sell');
+        }else{
+            return redirect('/');
+        }
     }
 
     public function show_buy(){
 
+        if(Session::has('session')){
+
         $listings = Listing::where('year', Session::get('session')->year)->where('branch', Session::get('session')->branch)->orderBy('created_at', 'desc')->get();        
 
         return view('student.buy')->with('listings', $listings);
+        }else{
+            return redirect('/');
+        }
     }
 
     public function add_listing(Request $request){
 
+        if(Session::has('session')){
 
         $path = '';
         $file = $request->file('file');
@@ -61,9 +77,19 @@ class StudentController extends Controller
         $new_listing->save();
 
     	return redirect('/student/ShowListings');
+
+
+
+        
+
+        }else{
+            return redirect('/');
+        }
     }
 
     public function show_listing(){
+
+        if(Session::has('session')){
 
     	$listings = Listing::orderBy('created_at', 'desc')->get();
 
@@ -83,9 +109,14 @@ class StudentController extends Controller
         }
 
     	return view('student.listings')->with('listings', $listings);
+        }else{
+            return redirect('/');
+        }
     }
 
     public function find_book(Request $request){
+
+        if(Session::has('session')){
 
         $listings = Listing::where('subject', $request->input('subject'))->get();
 
@@ -105,10 +136,14 @@ class StudentController extends Controller
         }
 
         return view('student.listings')->with('listings', $listings);
-
+        }else{
+            return redirect('/');            
+        }
     }
 
     public function show_activity(){
+
+        if(Session::has('session')){
 
         $listings = Listing::where('owner_id',Session('session')->id)->get();
         
@@ -124,10 +159,14 @@ class StudentController extends Controller
 
 
         return view('student.activity')->with('listings', $listings)->with('subscriptions', $subscriptions)->with('interested', $interested);
-
+        }else{
+            return redirect('/');
+        }
     }
 
     public function find_byyear($year){
+
+        if(Session::has('session')){
 
         $listings = Listing::where('year', $year)->get();
 
@@ -147,10 +186,14 @@ class StudentController extends Controller
         }
 
         return view('student.listings')->with('listings', $listings);        
-
+        }else{
+            return redirect('/');
+        }
     }
 
     public function find_bybranch($branch){
+
+        if(Session::has('session')){
 
         $listings = Listing::where('branch', $branch)->get();
 
@@ -170,10 +213,14 @@ class StudentController extends Controller
         }
 
         return view('student.listings')->with('listings', $listings);        
-
+        }else{
+            return redirect('/');
+        }
     }
 
     public function add_interested(Request $request){
+
+        if(Session::has('session')){
 
         $interested = new Interested;
         $interested->owner_id = $request->input('owner');
@@ -182,17 +229,25 @@ class StudentController extends Controller
         $interested->save();
 
         return redirect('/student/ShowListings');
- 
+        }else{
+            return redirect('/');
+        }
     }
 
     public function show_settings(){
 
+        if(Session::has('session')){
         $user = Student::where('id', Session('session')->id)->first();
 
         return view('student.settings')->with('user',$user);
+        }else{
+            return redirect('/');
+        }
     }
 
     public function change_settings(Request $request){
+
+        if(Session::has('session')){
 
         $change = Student::where('id', Session('session')->id)->first();
         $change->email = $request->input('email');
@@ -202,9 +257,14 @@ class StudentController extends Controller
         $change->save();
 
         return redirect('/student/settings')->with('status', 'Changes Made Successfully!');
+        }else{
+            return redirect('/');
+        }
     }
 
     public function change_password(Request $request){
+
+        if(Session::has('session')){
 
         $user = Student::where('id', Session('session')->id)->first();
 
@@ -223,9 +283,14 @@ class StudentController extends Controller
     }else{
         return Redirect::back()->withErrors(['The Entered Password is not correct']);
     }
+    }else{
+        return redirect('/');
+    }
     }
 
     public function add_subscription(Request $request){
+
+        if(Session::has('session')){
 
         $new = new Subscribe;
         $new->subscribed_id = Session('session')->id;
@@ -233,6 +298,42 @@ class StudentController extends Controller
         $new->save();
 
         return redirect('/student/activity');
+    }else{
+        return redirect('/');
+    }
+    }
+
+    public function remove(Request $request){
+
+        if(Session::has('session')){
+
+        if($request->input('type')== 'listing'){
+
+            $listing = Listing::where('id', $request->input('id'))->first();
+            $listing->delete();
+
+            return redirect('/student/activity');
+        }
+
+        if($request->input('type')== 'subscribe'){
+
+            $listing = Subscribe::where('id', $request->input('id'))->first();
+            $listing->delete();
+
+            return redirect('/student/activity');
+        }
+
+        if($request->input('type')== 'interested'){
+
+            $listing = Interested::where('id', $request->input('id'))->first();
+            $listing->delete();
+
+            return redirect('/student/activity');
+        }
+
+        }else{
+            return redirect('/');
+        }
 
     }
 }

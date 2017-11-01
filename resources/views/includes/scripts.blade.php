@@ -5,3 +5,4 @@
 <script type="text/javascript" src="{!! asset('js/core/popper.min.js') !!}"></script>
 <script type="text/javascript" src="{!! asset('js/core/bootstrap.min.js') !!}"></script>
 <script type="text/javascript" src="{!! asset('js/auth.js') !!}"></script>
+<script src="https://use.fontawesome.com/c9cc9ef658.js"></script>

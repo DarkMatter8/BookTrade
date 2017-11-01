@@ -5,8 +5,8 @@
 <nav class="navbar navbar-expand-lg bg-info">
     <div class="container">
         <div class="navbar-translate">
-            <a class="navbar-brand" href="#pablo">
-               BookTrade
+            <a class="navbar-brand" href="/">
+               <i class="fa fa-book" aria-hidden="true"></i> BookTrade
            </a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
    	        <span class="navbar-toggler-bar bar1"></span>
@@ -25,13 +25,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#pablo">Activity</a>
+                    <a class="nav-link" href="/student/activity">Activity</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#pablo">Settings</a>
+                    <a class="nav-link" href="/student/settings">Settings</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#pablo">Logout</a>
+                    <a class="nav-link" href="/logout">Logout</a>
                 </li>
             </ul>
         </div>
@@ -101,7 +101,7 @@
 	</div>
 	<div class="col-sm-6">
 	<div align="center">
-		<img id="blah" src="#" alt="your image"/>
+		<img id="blah" src="{{ asset('img/33.jpg') }}" alt="your image" height="50%" width="50%" />
 	</div>
 	</div>
 	</div>

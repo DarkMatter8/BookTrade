@@ -1,0 +1,1 @@
+<h1>Registration at BookTrade Successfull !</h1>

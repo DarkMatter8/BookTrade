@@ -33,6 +33,8 @@ Route::post('/ChangePassword', 'StudentController@change_password');
 
 Route::post('/find', 'StudentController@find_book');
 
+Route::post('/Remove', 'StudentController@remove');
+
 Route::post('/addInterested', 'StudentController@add_interested');
 
 Route::get('/findbyyear/{year}', 'StudentController@find_byyear');
